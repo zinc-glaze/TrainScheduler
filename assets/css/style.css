@@ -12,3 +12,7 @@
 .icon-block .material-icons {
 	font-size: inherit;
 }
+
+body {
+  background-image: url(../images/subtle_dots_@2X.png)
+}
