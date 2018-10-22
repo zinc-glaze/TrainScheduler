@@ -15,6 +15,11 @@ firebase.initializeApp(config);
 
 var database = firebase.database();
 
+//FUNCTIONS
+
+//Update train schedule
+
+
 //ADD TRAIN CLICK EVENT
 
 $("#add-train-button").on("click", function(event) {
@@ -52,17 +57,17 @@ $("#add-train-button").on("click", function(event) {
   $("#frequency").val("");
 });
 
-//CREATE FIREBASE EVENT FOR ADDING NEW TRAINS TO DATABASE AND DOM
+//CREATE FIREBASE EVENT FOR ADDING NEW TRAINS TO DOM
 
 //Takes snapshot of database
-database.ref().on("child_added", function(childSnapshot) {
-  console.log(childSnapshot.val());
+database.ref().on("child_added", function(trainSnapshot) {
+  console.log(trainSnapshot.val());
 
   //Saves values to variables
-  var trainName = childSnapshot.val().name;
-  var destination = childSnapshot.val().dest;
-  var firstTrainTime = childSnapshot.val().ftt;
-  var frequency = childSnapshot.val().freq;
+  var trainName = trainSnapshot.val().name;
+  var destination = trainSnapshot.val().dest;
+  var firstTrainTime = trainSnapshot.val().ftt;
+  var frequency = trainSnapshot.val().freq;
 
   //logs new train to console
   console.log(trainName);
@@ -70,18 +75,23 @@ database.ref().on("child_added", function(childSnapshot) {
   console.log(firstTrainTime);
   console.log(frequency);
 
-  //Format/"prettify" first train time
+  //Format/"prettify" first train time. Do I need this?
 
   //Calculate "next arrival time" and "minutes away"
-  var nextArrival;
-  var minutesAway;
+  var firstTimeConverted = moment(firstTrainTime, "HH:mm").subtract(1, "years");
+  var currentTime = moment();
+  var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
+  var remainder = diffTime % frequency;
+  var minutesAway = frequency - remainder;
+  var nextArrival = moment().add(minutesAway, "minutes");
+ 
 
   //Creates new row
-  var newRow = $("#last-row").append(
+  var newRow = $("<tr>").append(
     $("<td>").text(trainName),
     $("<td>").text(destination),
     $("<td>").text(frequency),
-    $("<td>").text(nextArrival),
+    $("<td>").text(moment(nextArrival).format("hh:mm")),
     $("<td>").text(minutesAway)
   );
 
