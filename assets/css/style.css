@@ -14,5 +14,10 @@
 }
 
 body {
-  background-image: url(../images/subtle_dots_@2X.png)
+  background-image: url(../images/subtle_dots_@2X.png);
 }
+
+h2, h5 {
+  font-family: 'Montserrat', sans-serif;
+}
+

@@ -11,6 +11,8 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="assets/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
   <link href="assets/css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
   <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase.js"></script>
   <!-- Moment.js -->
@@ -34,12 +36,12 @@
           <h5>Current Train Schedule</h5>
         </div>
         <div class="col s6">
-          <a class="btn-flat btn-small right waves-effect waves-light deep-orange darken-1 white-text" href="#">Update Times</a>
+          <a class="btn-small right waves-effect waves-light deep-orange darken-1 white-text" href="index.html">Update Times</a>
         </div>
       </div>
       <div class="row teal lighten-5 z-depth-1">
         <div class="col s12">
-          <table id="train-schedule">
+          <table class="responsive-table centered" id="train-schedule">
             <thead>
               <tr>
                   <th>Train Name</th>
@@ -102,7 +104,6 @@
   <!--  Scripts-->
   <!-- Materialize JS-->
   <script type="text/javascript" src="assets/js/materialize.js"></script>
-  <script type="text/javascript" src="assets/js/init.js"></script>
   <!-- App -->
   <script type="text/javascript" src="assets/js/app.js"></script>
 
