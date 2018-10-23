@@ -15,11 +15,6 @@ firebase.initializeApp(config);
 
 var database = firebase.database();
 
-//FUNCTIONS
-
-//Update train schedule
-
-
 //ADD TRAIN CLICK EVENT
 
 $("#add-train-button").on("click", function(event) {
@@ -28,8 +23,12 @@ $("#add-train-button").on("click", function(event) {
   //Gets user input
   var trainName = $("#train-name").val().trim();
   var destination = $("#destination").val().trim();
-  var firstTrainTime = $("#first-train-time").val().trim();
+  var firstTrainTime = moment($("#first-train-time").val().trim(), "HH:mm").format("HH:mm");
   var frequency = $("#frequency").val().trim();
+
+  //Validate user input
+  // var validTime = moment(firstTrainTime, "HH:mm", true).isValid();
+  // console.log(validTime);
 
   //Creates temp object for train data
   var trainObject = {
@@ -47,8 +46,6 @@ $("#add-train-button").on("click", function(event) {
   console.log(trainObject.dest);
   console.log(trainObject.ftt);
   console.log(trainObject.freq);
-
-  //confirm?
 
   //Clears input boxes
   $("#train-name").val("");
@@ -75,8 +72,6 @@ database.ref().on("child_added", function(trainSnapshot) {
   console.log(firstTrainTime);
   console.log(frequency);
 
-  //Format/"prettify" first train time. Do I need this?
-
   //Calculate "next arrival time" and "minutes away"
   var firstTimeConverted = moment(firstTrainTime, "HH:mm").subtract(1, "years");
   var currentTime = moment();
@@ -84,7 +79,6 @@ database.ref().on("child_added", function(trainSnapshot) {
   var remainder = diffTime % frequency;
   var minutesAway = frequency - remainder;
   var nextArrival = moment().add(minutesAway, "minutes");
- 
 
   //Creates new row
   var newRow = $("<tr>").append(
