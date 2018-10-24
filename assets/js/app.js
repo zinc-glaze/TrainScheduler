@@ -26,9 +26,12 @@ $("#add-train-button").on("click", function(event) {
   var firstTrainTime = moment($("#first-train-time").val().trim(), "HH:mm").format("HH:mm");
   var frequency = $("#frequency").val().trim();
 
-  //Validate user input
-  // var validTime = moment(firstTrainTime, "HH:mm", true).isValid();
-  // console.log(validTime);
+  //Validates user input - ADD CODE
+    //Create variable with regular expression of required time format
+    //Compare user input to regex
+    //If user input is not equal to regex, exit function and prompt user with correct format and visual feedback (e.g. red)
+    //If user input is equal to regex, continue with function execution
+  
 
   //Creates temp object for train data
   var trainObject = {
