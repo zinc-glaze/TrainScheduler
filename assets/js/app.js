@@ -45,7 +45,7 @@ $("#add-train-button").on("click", function(event) {
     timeRange = false;
   }
 
-  //If conditions for user input are not met: give error message, clear input box, and exit the click event
+  //If conditions for user firstTrainTime input are not met: give error message, clear input box, and exit the click event
   if (timeFormat === false || timeRange === false) {
     $("#error-msg").text("Please enter time in 24-hr (HH:mm) format only!");
     $("#error-msg").css("color", "red");
@@ -53,10 +53,20 @@ $("#add-train-button").on("click", function(event) {
     return;
   }
 
+  //If conditions for user frequency input are not met: give error message, clear input box, and exit the click event
+  if (isNaN(parseInt(frequency))) {
+    $("#error-mes").text("Please enter a number (in minutes) only!");
+    $("#error-mes").css("color", "red");
+    document.getElementById("frequency").value = "";
+    return;
+  }
+
   //User input is validated and accepted
   //Restore form text
   $("#error-msg").text("First Train Time (HH:mm - military time)");
   $("#error-msg").css("color", "#9e9e9e");
+  $("#error-mes").text("Frequency (min)");
+  $("#error-mes").css("color", "#9e9e9e");
   
   //Creates temp object for train data
   var trainObject = {
@@ -80,7 +90,6 @@ $("#add-train-button").on("click", function(event) {
 
 //Takes snapshot of database
 database.ref().on("child_added", function(trainSnapshot) {
-  console.log(trainSnapshot.val());
 
   //Saves values to variables
   var trainName = trainSnapshot.val().name;

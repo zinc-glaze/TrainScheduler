@@ -14,8 +14,9 @@ The app should fulfill the following specifications:
   * Styling and theme are completely up to you. Get Creative!
 
 In addition to the above, the app features:
-  * Full responsiveness across viewports
-  * A button to update all train times
+  * Responsiveness across viewports
+  * Basic validation of user time inputs
+  * A button to update all train times 
 
 This app uses the following tools:
   * HTML
