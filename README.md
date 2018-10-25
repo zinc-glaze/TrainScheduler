@@ -1,7 +1,7 @@
 # TrainScheduler
 ## Zeke Graves Firebase Homework
 
-This app allows users on different machines to dynamically create a train schedule that provides information on the next available train and time until it's arrival.
+This app allows users on different machines to dynamically create a train schedule that provides information on the next available train and time until its arrival.
 
 The app should fulfill the following specifications:
   * When adding trains, administrators should be able to submit the following:
