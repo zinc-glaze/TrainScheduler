@@ -23,16 +23,41 @@ $("#add-train-button").on("click", function(event) {
   //Gets user input
   var trainName = $("#train-name").val().trim();
   var destination = $("#destination").val().trim();
-  var firstTrainTime = moment($("#first-train-time").val().trim(), "HH:mm").format("HH:mm");
+  var firstTrainTime = $("#first-train-time").val().trim();
   var frequency = $("#frequency").val().trim();
 
-  //Validates user input - ADD CODE
-    //Create variable with regular expression of required time format
-    //Compare user input to regex
-    //If user input is not equal to regex, exit function and prompt user with correct format and visual feedback (e.g. red)
-    //If user input is equal to regex, continue with function execution
-  
+  //Validates user input
+  //Checks to see if firstTrainTime input is 5 characters long as has ":" at the third character
+  if (firstTrainTime.length === 5 && firstTrainTime[2] === ":") {
+    var timeFormat = true;
+  }
+  else {
+    timeFormat = false;
+  }
+  //Splits firstTrainTime into two strings
+  var timeArray = firstTrainTime.split(":");
 
+  //Checks to see if both numbers are within valid range
+  if (parseInt(timeArray[0]) <= 23 && parseInt(timeArray[1]) <=59) {
+    var timeRange = true;
+  }
+  else {
+    timeRange = false;
+  }
+
+  //If conditions for user input are not met: give error message, clear input box, and exit the click event
+  if (timeFormat === false || timeRange === false) {
+    $("#error-msg").text("Please enter time in 24-hr (HH:mm) format only!");
+    $("#error-msg").css("color", "red");
+    document.getElementById("first-train-time").value = "";
+    return;
+  }
+
+  //User input is validated and accepted
+  //Restore form text
+  $("#error-msg").text("First Train Time (HH:mm - military time)");
+  $("#error-msg").css("color", "#9e9e9e");
+  
   //Creates temp object for train data
   var trainObject = {
     name: trainName,
@@ -43,12 +68,6 @@ $("#add-train-button").on("click", function(event) {
 
   //Pushes train data to database
   database.ref().push(trainObject);
-
-  //Logs user input to console
-  console.log(trainObject.name);
-  console.log(trainObject.dest);
-  console.log(trainObject.ftt);
-  console.log(trainObject.freq);
 
   //Clears input boxes
   $("#train-name").val("");
@@ -68,12 +87,6 @@ database.ref().on("child_added", function(trainSnapshot) {
   var destination = trainSnapshot.val().dest;
   var firstTrainTime = trainSnapshot.val().ftt;
   var frequency = trainSnapshot.val().freq;
-
-  //logs new train to console
-  console.log(trainName);
-  console.log(destination);
-  console.log(firstTrainTime);
-  console.log(frequency);
 
   //Calculate "next arrival time" and "minutes away"
   var firstTimeConverted = moment(firstTrainTime, "HH:mm").subtract(1, "years");
