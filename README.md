@@ -1,9 +1,15 @@
 # TrainScheduler
-## Zeke Graves Firebase Homework
+## UNC Coding Bootcamp Homework #7  10-23-2018
 
-This app allows users on different machines to dynamically create a train schedule that provides information on the next available train and time until its arrival.
+This app allows clients on different machines to dynamically create a train schedule that provides information on the next available train and time until its arrival.
 
-The app should fulfill the following specifications:
+The deployed app can be viewed at: https://zinc-glaze.github.io/TrainScheduler/
+
+### Screenshot
+
+![Train Scheduler](screens/screencapture-zinc-glaze-github-io-TrainScheduler-2019-06-27-19_29_39.png)
+
+The assignment gavethe following requirements:
   * When adding trains, administrators should be able to submit the following:
     * Train Name
     * Destination 
@@ -20,7 +26,7 @@ In addition to the above, the app features:
 
 This app uses the following tools:
   * HTML
-  * Materialize for layout, responsiveness, and basic styling
+  * Materialize CSS Framework for layout, responsiveness, and basic styling
   * CSS for additional styling
   * Javascript for app logic, collecting user input, and writing to the DOM
   * jQuery for Javascript library
